@@ -63,3 +63,29 @@ You can verify the pipeline by running it with the real dataset:
 ```bash
 python main_pipeline.py --file Dataset/Train_Inpatientdata-1542865627584.csv --labels Dataset/Train-1542865627584.csv
 ```
+
+## Running the Dashboard
+
+To run the full application (Backend + Frontend), you need two terminal windows:
+
+### 1. Start the Backend (FastAPI)
+
+Navigate to the `backend` directory and start the Uvicorn server:
+
+```bash
+cd backend
+pip install -r requirements.txt
+python -m uvicorn app:app --port 8000 --reload
+```
+*The API will be available at `http://localhost:8000/dashboard`*
+
+### 2. Start the Frontend (React + Vite)
+
+Open a new terminal, navigate to the `arogya-vigilant` directory, and start the development server:
+
+```bash
+cd arogya-vigilant
+npm install
+npm run dev
+```
+*The dashboard will be available at `http://localhost:5173`*
