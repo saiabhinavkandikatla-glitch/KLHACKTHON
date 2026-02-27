@@ -35,64 +35,71 @@ const DocumentInvestigation = () => {
         }
 
         setFile(selectedFile);
-        startPipeline();
+        startPipeline(selectedFile);
     };
 
-    const startPipeline = () => {
+    const startPipeline = async (uploadFile?: File) => {
+        const activeFile = uploadFile || file;
+        if (!activeFile) return;
+
         setProcessState('extracting');
-        setProgress(10);
+        setProgress(15);
         setResults(null);
         setErrorMessage('');
 
-        // Simulate strict validation pipeline
-        setTimeout(() => {
-            setProcessState('classifying');
-            setProgress(35);
+        try {
+            // Upload the file via FormData
+            const formData = new FormData();
+            formData.append('file', activeFile);
+
+            // Progress tracking simulation (since fetch doesn't have native upload progress easily without axios)
+            let progressInterval = setInterval(() => {
+                setProgress(prev => {
+                    if (prev < 40) return prev + 5;
+                    if (prev === 40) setProcessState('classifying');
+                    if (prev < 65) return prev + 5;
+                    if (prev === 65) setProcessState('preprocessing');
+                    if (prev < 80) return prev + 2;
+                    if (prev === 80) setProcessState('embedding');
+                    return prev < 90 ? prev + 1 : prev;
+                });
+            }, 200);
+
+            const response = await fetch('http://localhost:8000/api/analyze-image', {
+                method: 'POST',
+                body: formData
+            });
+
+            clearInterval(progressInterval);
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.detail || `Upload Failed (${response.status})`);
+            }
+
+            const data = await response.json();
+
+            setProcessState('scoring');
+            setProgress(95);
 
             setTimeout(() => {
-                // Randomly simulate a failed X-ray classification (20% chance to fail)
-                const isXray = Math.random() > 0.2;
-                const confidence = isXray ? 85 + Math.random() * 14 : 20 + Math.random() * 50;
+                setResults({
+                    confidence: data.confidence,
+                    ifScore: data.ifScore,
+                    dupScore: data.dupScore,
+                    finalRisk: data.finalRisk,
+                    pHash: data.pHash,
+                    vectorId: data.vectorId
+                });
+                setProcessState('complete');
+                setProgress(100);
+            }, 600);
 
-                if (confidence < 80) {
-                    setProcessState('rejected');
-                    setErrorMessage(`Validation Failed (Confidence ${confidence.toFixed(1)}%). Invalid file type detected. Expected: Diagnostic X-Ray Image.`);
-                    setProgress(100);
-                    return;
-                }
-
-                setProcessState('preprocessing');
-                setProgress(55);
-
-                setTimeout(() => {
-                    setProcessState('embedding');
-                    setProgress(75);
-
-                    setTimeout(() => {
-                        setProcessState('scoring');
-                        setProgress(90);
-
-                        setTimeout(() => {
-                            // Generate strict scores
-                            const ifScore = Math.floor(Math.random() * 60) + 20; // 0-100 mapped Isolation Forest
-                            const dupScore = Math.floor(Math.random() * 40); // 0-100 Duplication baseline
-                            const finalRisk = Math.round((0.7 * ifScore) + (0.3 * dupScore));
-
-                            setResults({
-                                confidence: confidence.toFixed(1),
-                                ifScore,
-                                dupScore,
-                                finalRisk,
-                                pHash: `a${Math.floor(Math.random() * 1000000)}b${Math.floor(Math.random() * 10000)}c`,
-                                vectorId: `EMB-2024-${Math.floor(Math.random() * 9000) + 1000}`
-                            });
-                            setProcessState('complete');
-                            setProgress(100);
-                        }, 800);
-                    }, 800);
-                }, 800);
-            }, 1200);
-        }, 1000);
+        } catch (err: any) {
+            setProcessState('rejected');
+            setErrorMessage(`Validation Failed: ${err.message}. Ensure standard PDF format and backend availability.`);
+            setProgress(100);
+        }
     };
 
     const resetUpload = () => {

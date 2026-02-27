@@ -3,3 +3,7 @@ fastapi
 pandas
 numpy
 scikit-learn
+imagehash
+pymupdf
+Pillow
+python-multipart

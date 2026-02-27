@@ -1,19 +1,18 @@
 import os
 from PIL import Image
 import imagehash
-from pdf2image import convert_from_path
+import fitz  # PyMuPDF
 import numpy as np
 
 
 class ImageForensicsEngine:
 
-    def __init__(self, similarity_threshold=85, poppler_path=r"C:\poppler-25.12.0\Library\bin"):
+    def __init__(self, similarity_threshold=85):
         """
         similarity_threshold:
             Percentage above which fraud is flagged.
         """
         self.similarity_threshold = similarity_threshold
-        self.poppler_path = poppler_path
 
     # --------------------------------------------
     # Load image or PDF
@@ -24,20 +23,13 @@ class ImageForensicsEngine:
             raise FileNotFoundError(f"File not found: {file_path}")
 
         if file_path.lower().endswith(".pdf"):
-            pages = convert_from_path(
-                os.path.abspath(file_path),
-                poppler_path=self.poppler_path,
-                dpi=200,
-                first_page=1,
-                last_page=1,
-                fmt="png",
-                strict=False
-            )
-
-            if not pages:
+            doc = fitz.open(file_path)
+            if doc.page_count == 0:
                 raise Exception("PDF conversion failed.")
-
-            return pages[0]
+            page = doc.load_page(0)
+            pix = page.get_pixmap(dpi=200)
+            img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+            return img
 
         return Image.open(file_path)
 

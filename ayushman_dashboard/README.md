@@ -74,7 +74,7 @@ Navigate to the `backend` directory and start the Uvicorn server:
 
 ```bash
 cd backend
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 python -m uvicorn app:app --port 8000 --reload
 ```
 *The API will be available at `http://localhost:8000/dashboard`*
