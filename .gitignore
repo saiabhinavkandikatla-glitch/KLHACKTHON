@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Data
+Dataset/
+cleaned_claims.csv
+sample_claims.csv
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
