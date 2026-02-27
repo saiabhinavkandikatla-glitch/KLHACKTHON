@@ -9,7 +9,6 @@ import DocumentInvestigation from './components/DocumentInvestigation';
 
 function App() {
     const [activeSection, setActiveSection] = useState('overview');
-<<<<<<< HEAD
     const [dashboardData, setDashboardData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -32,8 +31,6 @@ function App() {
         };
         fetchDashboardData();
     }, []);
-=======
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
 
     useEffect(() => {
         const handleScroll = () => {
@@ -58,7 +55,6 @@ function App() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [activeSection]);
 
-<<<<<<< HEAD
     if (loading) {
         return (
             <div className="flex h-screen items-center justify-center bg-offwhite flex-col gap-4">
@@ -86,14 +82,11 @@ function App() {
         );
     }
 
-=======
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
     return (
         <div className="bg-offwhite min-h-screen text-slate-800 flex flex-col font-sans">
             <TopNav activeSection={activeSection} />
 
             <main className="flex-1 w-full">
-<<<<<<< HEAD
                 <HeroSection data={dashboardData?.hero} />
 
                 <div className="max-w-7xl mx-auto px-6 space-y-16 pb-32">
@@ -107,21 +100,6 @@ function App() {
 
                     <section id="providers" className="scroll-mt-24">
                         <ProviderRanking data={dashboardData?.providers} />
-=======
-                <HeroSection />
-
-                <div className="max-w-7xl mx-auto px-6 space-y-16 pb-32">
-                    <section id="overview" className="scroll-mt-24">
-                        <Overview />
-                    </section>
-
-                    <section id="analytics" className="scroll-mt-24">
-                        <Analytics />
-                    </section>
-
-                    <section id="providers" className="scroll-mt-24">
-                        <ProviderRanking />
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
                     </section>
 
                     <section id="upload" className="scroll-mt-24">

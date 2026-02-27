@@ -1,11 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
 
-<<<<<<< HEAD
 const defaultTimelineData = [
-=======
-const timelineData = [
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
     { month: 'Jan', processed: 4000, flagged: 240, saved: 2400 },
     { month: 'Feb', processed: 3000, flagged: 139, saved: 2210 },
     { month: 'Mar', processed: 2000, flagged: 980, saved: 2290 },
@@ -15,11 +11,7 @@ const timelineData = [
     { month: 'Jul', processed: 3490, flagged: 430, saved: 2100 },
 ];
 
-<<<<<<< HEAD
 const defaultRegionData = [
-=======
-const regionData = [
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
     { region: 'North', legitimate: 4000, fraudulent: 400 },
     { region: 'South', legitimate: 3000, fraudulent: 139 },
     { region: 'East', legitimate: 2000, fraudulent: 980 },
@@ -27,14 +19,10 @@ const regionData = [
     { region: 'Central', legitimate: 1890, fraudulent: 480 },
 ];
 
-<<<<<<< HEAD
 const Analytics = ({ data }: { data?: any }) => {
     const timelineData = data?.timeline || defaultTimelineData;
     const regionData = data?.regions || defaultRegionData;
 
-=======
-const Analytics = () => {
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
     return (
         <div className="w-full">
             <h2 className="text-2xl font-bold text-hcblue-900 mb-6 border-b border-slate-200 pb-2">

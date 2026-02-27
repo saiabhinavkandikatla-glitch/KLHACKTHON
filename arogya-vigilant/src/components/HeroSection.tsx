@@ -1,15 +1,11 @@
 import React from 'react';
 import { ShieldCheck, Users, AlertTriangle } from 'lucide-react';
 
-<<<<<<< HEAD
 const HeroSection = ({ data }: { data?: any }) => {
     const totalClaims = data?.totalClaims || "145,289";
     const suspiciousPercentage = data?.suspiciousPercentage || "12.1%";
     const highRiskProviders = data?.highRiskProviders?.toLocaleString() || "341";
 
-=======
-const HeroSection = () => {
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
     return (
         <div className="bg-white border-b border-slate-200 pt-16 pb-12 mb-12">
             <div className="max-w-7xl mx-auto px-6">
@@ -30,11 +26,7 @@ const HeroSection = () => {
                             <ShieldCheck className="w-5 h-5 text-hcblue-800" />
                             Total Claims Analyzed
                         </div>
-<<<<<<< HEAD
                         <div className="text-3xl font-bold text-hcblue-900 mt-auto">{totalClaims}</div>
-=======
-                        <div className="text-3xl font-bold text-hcblue-900 mt-auto">145,289</div>
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
                     </div>
 
                     <div className="bg-offwhite border border-slate-200 rounded-lg p-6 flex flex-col">
@@ -42,11 +34,7 @@ const HeroSection = () => {
                             <AlertTriangle className="w-5 h-5 text-danger-700" />
                             Suspicious Claims
                         </div>
-<<<<<<< HEAD
                         <div className="text-3xl font-bold text-danger-700 mt-auto">{suspiciousPercentage}</div>
-=======
-                        <div className="text-3xl font-bold text-danger-700 mt-auto">12.1%</div>
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
                     </div>
 
                     <div className="bg-offwhite border border-slate-200 rounded-lg p-6 flex flex-col">
@@ -54,11 +42,7 @@ const HeroSection = () => {
                             <Users className="w-5 h-5 text-teals-600" />
                             High-Risk Providers
                         </div>
-<<<<<<< HEAD
                         <div className="text-3xl font-bold text-teals-600 mt-auto">{highRiskProviders}</div>
-=======
-                        <div className="text-3xl font-bold text-teals-600 mt-auto">341</div>
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
                     </div>
                 </div>
             </div>

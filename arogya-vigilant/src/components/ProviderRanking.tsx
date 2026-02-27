@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { ShieldAlert, ArrowUpDown, ExternalLink } from 'lucide-react';
 
-<<<<<<< HEAD
 const defaultProviderData = [
-=======
-const providerData = [
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
     { id: 'HOSP-29004', name: 'Metro Health Cardiology', location: 'Delhi', cases: 1420, avgClaim: '₹84,500', baseRisk: 88, dupRisk: 94 },
     { id: 'HOSP-11092', name: 'Sunrise Orthopedics', location: 'Mumbai', cases: 890, avgClaim: '₹112,000', baseRisk: 84, dupRisk: 85 },
     { id: 'HOSP-55018', name: 'LifeCare General', location: 'Bangalore', cases: 3100, avgClaim: '₹24,000', baseRisk: 81, dupRisk: 70 },
@@ -17,7 +13,6 @@ const calculateUnifiedScore = (baseScore: number, dupScore: number) => {
     return Math.round((0.7 * baseScore) + (0.3 * dupScore));
 };
 
-<<<<<<< HEAD
 const ProviderRanking = ({ data }: { data?: any }) => {
     const [sortField, setSortField] = useState('unifiedRisk');
 
@@ -28,16 +23,6 @@ const ProviderRanking = ({ data }: { data?: any }) => {
         unifiedRisk: calculateUnifiedScore(p.baseRisk, p.dupRisk)
     })).sort((a: any, b: any) => b.unifiedRisk - a.unifiedRisk);
 
-=======
-const processedData = providerData.map(p => ({
-    ...p,
-    unifiedRisk: calculateUnifiedScore(p.baseRisk, p.dupRisk)
-})).sort((a, b) => b.unifiedRisk - a.unifiedRisk);
-
-const ProviderRanking = () => {
-    const [sortField, setSortField] = useState('unifiedRisk');
-
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
     return (
         <div className="w-full">
             <div className="flex justify-between items-center mb-6 border-b border-slate-200 pb-2">
@@ -72,11 +57,7 @@ const ProviderRanking = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
-<<<<<<< HEAD
                             {processedData.map((provider: any) => (
-=======
-                            {processedData.map((provider) => (
->>>>>>> 9a505941b669690bc3a9f36b0dadc7abe6b2ccb6
                                 <tr key={provider.id} className="hover:bg-slate-50 transition-colors">
                                     <td className="px-6 py-4">
                                         <span className="font-mono text-sm font-semibold text-hcblue-900 bg-slate-100 px-2 py-1 rounded inline-block">
